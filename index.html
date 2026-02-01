@@ -3,117 +3,139 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Huyen, will you be my Valentine? 💘</title>
+
+  <!-- FAKE LINK PREVIEW TITLE -->
+  <title>Top ways to be a perfect girlfriend 💀☠️</title>
 
   <style>
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(135deg, #ffdde7, #fff1f6);
+      background: linear-gradient(135deg, #fff1f5, #ffffff);
       display: grid;
       place-items: center;
-      min-height: 100vh;
-      color: #1f1f1f;
-      overflow: hidden;
+      color: #1a1a1a;
     }
 
     .card {
+      width: min(540px, 92vw);
       background: white;
-      width: min(520px, 92vw);
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 30px;
       text-align: center;
       box-shadow: 0 20px 50px rgba(0,0,0,0.15);
       position: relative;
+      overflow: hidden;
     }
 
     h1 {
       font-size: clamp(26px, 4vw, 34px);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     p {
       opacity: 0.8;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
     }
 
     .stage {
       position: relative;
       height: 220px;
-      background: #fff0f6;
       border-radius: 16px;
-      border: 2px dashed #ffc1d6;
-      padding: 16px;
+      border: 2px dashed #ffd1dc;
+      padding: 18px;
       overflow: hidden;
+      background: #fff7fa;
     }
 
-    button {
+    .btn {
       border: none;
-      padding: 14px 22px;
-      font-size: 16px;
+      padding: 14px 24px;
       border-radius: 999px;
+      font-size: 16px;
       cursor: pointer;
       box-shadow: 0 8px 18px rgba(0,0,0,0.15);
       transition: transform 0.15s ease;
       user-select: none;
     }
 
-    button:active {
-      transform: scale(0.95);
+    .btn:active {
+      transform: scale(0.97);
     }
 
     .yes {
-      background: #ff4d7d;
+      background: #ff4d6d;
       color: white;
-      margin-right: 12px;
     }
 
     .no {
-      background: #333;
+      background: #222;
       color: white;
       position: absolute;
       left: 60%;
-      top: 55%;
+      top: 60%;
     }
 
     .message {
       margin-top: 18px;
-      font-size: 18px;
       font-weight: 600;
+      font-size: 18px;
       min-height: 28px;
     }
 
-    .heart {
-      position: fixed;
-      font-size: 20px;
-      animation: float 3s linear forwards;
-      pointer-events: none;
+    img {
+      margin-top: 18px;
+      width: 100%;
+      max-width: 320px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
-    @keyframes float {
-      from {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-120vh) scale(1.5);
-        opacity: 0;
-      }
+    .skull-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image:
+        radial-gradient(circle at 15% 25%, #000 0 6px, transparent 7px),
+        radial-gradient(circle at 80% 20%, #000 0 5px, transparent 6px),
+        radial-gradient(circle at 45% 80%, #000 0 7px, transparent 8px),
+        radial-gradient(circle at 85% 75%, #000 0 6px, transparent 7px);
+    }
+
+    .footer {
+      margin-top: 16px;
+      font-size: 13px;
+      opacity: 0.6;
     }
   </style>
 </head>
 
 <body>
   <div class="card">
-    <h1>Huyen, will you be my Valentine? 💘</h1>
-    <p>You only have one correct answer 😄</p>
+    <div class="skull-bg"></div>
+
+    <!-- FAKE PAGE HEADING -->
+    <h1>Top ways to be a perfect girlfriend ☠️💀</h1>
+    <p>Number 1 will SHOCK you 😈</p>
 
     <div class="stage" id="stage">
-      <button class="yes" id="yesBtn">Yes 💖</button>
-      <button class="no" id="noBtn">No 😅</button>
+      <button class="btn yes" id="yesBtn">Show the list</button>
+      <button class="btn no" id="noBtn">No thanks</button>
     </div>
 
     <div class="message" id="msg"></div>
+
+    <!-- DANCING MAN (HIDDEN INITIALLY) -->
+    <img
+      id="danceGif"
+      src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif"
+      alt="Good choice dancing man"
+      style="display:none;"
+    />
+
+    <div class="footer">100% serious relationship advice.</div>
   </div>
 
   <script>
@@ -121,17 +143,19 @@
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const msg = document.getElementById("msg");
+    const gif = document.getElementById("danceGif");
 
-    function random(min, max) {
+    function rand(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     function moveNo() {
       const s = stage.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
+      const pad = 12;
 
-      const left = random(10, s.width - b.width - 10);
-      const top = random(10, s.height - b.height - 10);
+      const left = rand(pad, s.width - b.width - pad);
+      const top = rand(pad, s.height - b.height - pad);
 
       noBtn.style.left = left + "px";
       noBtn.style.top = top + "px";
@@ -143,27 +167,16 @@
       moveNo();
     }, { passive: false });
 
+    noBtn.addEventListener("focus", moveNo);
+
     yesBtn.addEventListener("click", () => {
-      msg.textContent = "YAY! 💖 I’m so happy, Huyen 🥰 When are we going on our Valentine’s date? 🍷✨";
+      msg.textContent = "GOOD CHOICE 😎💘";
+      gif.style.display = "block";
+
       yesBtn.disabled = true;
       noBtn.disabled = true;
       noBtn.style.opacity = 0.4;
-      launchHearts();
     });
-
-    function launchHearts() {
-      for (let i = 0; i < 25; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.textContent = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.bottom = "-20px";
-        heart.style.animationDuration = random(2, 4) + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 4000);
-      }
-    }
 
     window.addEventListener("load", moveNo);
     window.addEventListener("resize", moveNo);
