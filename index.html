@@ -4,15 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- FAKE LINK PREVIEW TITLE -->
+  <!-- FAKE PREVIEW (THIS IS WHAT SHOWS IN CHAT APPS) -->
   <title>Top ways to be a perfect girlfriend 💀☠️</title>
+  <meta property="og:title" content="Top ways to be a perfect girlfriend 💀☠️">
+  <meta property="og:description" content="Number 1 will SHOCK you 😈">
+  <meta property="og:type" content="website">
 
   <style>
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: linear-gradient(135deg, #ffe0ec, #fff5fa);
-      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -20,68 +23,61 @@
 
     .card {
       background: white;
-      width: min(520px, 92vw);
-      border-radius: 22px;
       padding: 32px;
+      border-radius: 22px;
       text-align: center;
+      width: min(500px, 92vw);
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       position: relative;
-      overflow: hidden;
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: 30px;
+      font-size: 28px;
+      margin-bottom: 12px;
     }
 
     p {
-      margin: 0 0 24px;
       opacity: 0.8;
+      margin-bottom: 24px;
     }
 
     .stage {
       position: relative;
-      height: 220px;
+      height: 200px;
     }
 
     button {
-      border: none;
       padding: 14px 26px;
       border-radius: 999px;
+      border: none;
       font-size: 16px;
       cursor: pointer;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      transition: transform 0.15s ease;
-    }
-
-    button:active {
-      transform: scale(0.95);
     }
 
     .yes {
       background: #ff4d7d;
       color: white;
-      margin-right: 12px;
     }
 
     .no {
       background: #555;
       color: white;
       position: absolute;
-      left: 60%;
+      left: 55%;
       top: 55%;
     }
 
     .result {
-      margin-top: 24px;
+      display: none;
       font-size: 24px;
       font-weight: 700;
-      display: none;
+      margin-top: 24px;
     }
 
     .dance {
-      margin-top: 16px;
       display: none;
+      margin-top: 16px;
     }
 
     .dance img {
@@ -93,9 +89,8 @@
 
 <body>
   <div class="card">
-    <!-- WHAT SHE SEES -->
     <h1>Huyen, will you be my Valentine? 💘</h1>
-    <p>Be honest… 😌</p>
+    <p>Choose wisely 😌</p>
 
     <div class="stage" id="stage">
       <button class="yes" id="yesBtn">Yes</button>
@@ -105,10 +100,7 @@
     <div class="result" id="result">GOOD CHOICE 😎💃</div>
 
     <div class="dance" id="dance">
-      <img
-        src="https://media.tenor.com/2roX3uxz_68AAAAC/dancing-happy.gif"
-        alt="Dancing man"
-      />
+      <img src="https://media.tenor.com/2roX3uxz_68AAAAC/dancing-happy.gif" alt="Dancing man">
     </div>
   </div>
 
@@ -120,14 +112,10 @@
     const dance = document.getElementById("dance");
 
     function moveNo() {
-      const stageRect = stage.getBoundingClientRect();
-      const btnRect = noBtn.getBoundingClientRect();
-
-      const x = Math.random() * (stageRect.width - btnRect.width);
-      const y = Math.random() * (stageRect.height - btnRect.height);
-
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+      const x = Math.random() * 70;
+      const y = Math.random() * 70;
+      noBtn.style.left = x + "%";
+      noBtn.style.top = y + "%";
     }
 
     noBtn.addEventListener("mouseover", moveNo);
@@ -139,9 +127,8 @@
     yesBtn.addEventListener("click", () => {
       result.style.display = "block";
       dance.style.display = "block";
+      noBtn.style.display = "none";
       yesBtn.disabled = true;
-      noBtn.disabled = true;
-      noBtn.style.opacity = 0.4;
     });
   </script>
 </body>
