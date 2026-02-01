@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Huyen, will you be my Valentine? 💘</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #ffdde7, #fff1f6);
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      color: #1f1f1f;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      width: min(520px, 92vw);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    h1 {
+      font-size: clamp(26px, 4vw, 34px);
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.8;
+      margin-bottom: 25px;
+    }
+
+    .stage {
+      position: relative;
+      height: 220px;
+      background: #fff0f6;
+      border-radius: 16px;
+      border: 2px dashed #ffc1d6;
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    button {
+      border: none;
+      padding: 14px 22px;
+      font-size: 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+      transition: transform 0.15s ease;
+      user-select: none;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .yes {
+      background: #ff4d7d;
+      color: white;
+      margin-right: 12px;
+    }
+
+    .no {
+      background: #333;
+      color: white;
+      position: absolute;
+      left: 60%;
+      top: 55%;
+    }
+
+    .message {
+      margin-top: 18px;
+      font-size: 18px;
+      font-weight: 600;
+      min-height: 28px;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 20px;
+      animation: float 3s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Huyen, will you be my Valentine? 💘</h1>
+    <p>You only have one correct answer 😄</p>
+
+    <div class="stage" id="stage">
+      <button class="yes" id="yesBtn">Yes 💖</button>
+      <button class="no" id="noBtn">No 😅</button>
+    </div>
+
+    <div class="message" id="msg"></div>
+  </div>
+
+  <script>
+    const stage = document.getElementById("stage");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const msg = document.getElementById("msg");
+
+    function random(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function moveNo() {
+      const s = stage.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+
+      const left = random(10, s.width - b.width - 10);
+      const top = random(10, s.height - b.height - 10);
+
+      noBtn.style.left = left + "px";
+      noBtn.style.top = top + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNo();
+    }, { passive: false });
+
+    yesBtn.addEventListener("click", () => {
+      msg.textContent = "YAY! 💖 I’m so happy, Huyen 🥰 When are we going on our Valentine’s date? 🍷✨";
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+      noBtn.style.opacity = 0.4;
+      launchHearts();
+    });
+
+    function launchHearts() {
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "-20px";
+        heart.style.animationDuration = random(2, 4) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+      }
+    }
+
+    window.addEventListener("load", moveNo);
+    window.addEventListener("resize", moveNo);
+  </script>
+</body>
+</html>
